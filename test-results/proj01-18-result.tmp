@@ -1,0 +1,38 @@
+* (TEST 18) Extract Files from Archive Created by tar
+COMMENTS:
+Creates an archive using the standard tar tool, then extracts it with minitar
+
+** program: bash -v
+
+** --- Failure messages --- 
+- FAILURE: Output Mismatch at lines marked
+
+** --- Side by Side Differences ---
+- Expect output in: test-results/raw/proj01-18-expect.tmp
+- Actual output in: test-results/raw/proj01-18-actual.tmp
+- Differing lines have a character like '|' '>' or '<' in the middle
+#+BEGIN_SRC sbs-diff
+==== EXPECT ====                 ==== ACTUAL ====                           
+>> ./minitar_tests.sh 18         >> ./minitar_tests.sh 18
+large.bin                      | diff: large.bin: No such file or directory
+f1.txt                         | diff: f1.txt: No such file or directory
+f9.txt                         | diff: f9.txt: No such file or directory
+f9.bin                         | diff: f9.bin: No such file or directory
+f1.bin                         | diff: f1.bin: No such file or directory
+gatsby.txt                     | diff: gatsby.txt: No such file or directory
+#+END_SRC
+
+** --- Line Differences ---
+EXPECT:   2) large.bin
+EXPECT:   3) f1.txt
+EXPECT:   4) f9.txt
+EXPECT:   5) f9.bin
+EXPECT:   6) f1.bin
+EXPECT:   7) gatsby.txt
+ACTUAL:   2) diff: large.bin: No such file or directory
+ACTUAL:   3) diff: f1.txt: No such file or directory
+ACTUAL:   4) diff: f9.txt: No such file or directory
+ACTUAL:   5) diff: f9.bin: No such file or directory
+ACTUAL:   6) diff: f1.bin: No such file or directory
+ACTUAL:   7) diff: gatsby.txt: No such file or directory
+

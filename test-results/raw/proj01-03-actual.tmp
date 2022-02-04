@@ -1,0 +1,5 @@
+>> ./minitar_tests.sh 3
+tar: test.tar: Cannot open: No such file or directory
+tar: Error is not recoverable: exiting now
+diff: hello.txt: No such file or directory
+diff: f2.bin: No such file or directory

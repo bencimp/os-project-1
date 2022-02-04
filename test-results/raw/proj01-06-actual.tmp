@@ -1,0 +1,25 @@
+>> ./minitar_tests.sh 6
+tar: test.tar: Cannot open: No such file or directory
+tar: Error is not recoverable: exiting now
+diff: hello.txt: No such file or directory
+diff: gatsby.txt: No such file or directory
+diff: f1.txt: No such file or directory
+diff: f1.bin: No such file or directory
+diff: f2.txt: No such file or directory
+diff: f2.bin: No such file or directory
+diff: f3.txt: No such file or directory
+diff: f3.bin: No such file or directory
+diff: f4.txt: No such file or directory
+diff: f4.bin: No such file or directory
+diff: f5.txt: No such file or directory
+diff: f5.bin: No such file or directory
+diff: f6.txt: No such file or directory
+diff: f6.bin: No such file or directory
+diff: f7.txt: No such file or directory
+diff: f7.bin: No such file or directory
+diff: f8.txt: No such file or directory
+diff: f8.bin: No such file or directory
+diff: f9.txt: No such file or directory
+diff: f9.bin: No such file or directory
+diff: f10.txt: No such file or directory
+diff: f10.bin: No such file or directory

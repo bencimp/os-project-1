@@ -1,0 +1,90 @@
+* (TEST 6) Create Archive with Many Files
+COMMENTS:
+Creates an archive from many different files, both text and binary
+
+** program: bash -v
+
+** --- Failure messages --- 
+- FAILURE: Output Mismatch at lines marked
+
+** --- Side by Side Differences ---
+- Expect output in: test-results/raw/proj01-06-expect.tmp
+- Actual output in: test-results/raw/proj01-06-actual.tmp
+- Differing lines have a character like '|' '>' or '<' in the middle
+#+BEGIN_SRC sbs-diff
+==== EXPECT ====                ==== ACTUAL ====                                     
+>> ./minitar_tests.sh 6         >> ./minitar_tests.sh 6
+hello.txt                     | tar: test.tar: Cannot open: No such file or directory
+gatsby.txt                    | tar: Error is not recoverable: exiting now
+f1.txt                        | diff: hello.txt: No such file or directory
+f1.bin                        | diff: gatsby.txt: No such file or directory
+f2.txt                        | diff: f1.txt: No such file or directory
+f2.bin                        | diff: f1.bin: No such file or directory
+f3.txt                        | diff: f2.txt: No such file or directory
+f3.bin                        | diff: f2.bin: No such file or directory
+f4.txt                        | diff: f3.txt: No such file or directory
+f4.bin                        | diff: f3.bin: No such file or directory
+f5.txt                        | diff: f4.txt: No such file or directory
+f5.bin                        | diff: f4.bin: No such file or directory
+f6.txt                        | diff: f5.txt: No such file or directory
+f6.bin                        | diff: f5.bin: No such file or directory
+f7.txt                        | diff: f6.txt: No such file or directory
+f7.bin                        | diff: f6.bin: No such file or directory
+f8.txt                        | diff: f7.txt: No such file or directory
+f8.bin                        | diff: f7.bin: No such file or directory
+f9.txt                        | diff: f8.txt: No such file or directory
+f9.bin                        | diff: f8.bin: No such file or directory
+f10.txt                       | diff: f9.txt: No such file or directory
+f10.bin                       | diff: f9.bin: No such file or directory
+                              > diff: f10.txt: No such file or directory
+                              > diff: f10.bin: No such file or directory
+#+END_SRC
+
+** --- Line Differences ---
+EXPECT:   2) hello.txt
+EXPECT:   3) gatsby.txt
+EXPECT:   4) f1.txt
+EXPECT:   5) f1.bin
+EXPECT:   6) f2.txt
+EXPECT:   7) f2.bin
+EXPECT:   8) f3.txt
+EXPECT:   9) f3.bin
+EXPECT:  10) f4.txt
+EXPECT:  11) f4.bin
+EXPECT:  12) f5.txt
+EXPECT:  13) f5.bin
+EXPECT:  14) f6.txt
+EXPECT:  15) f6.bin
+EXPECT:  16) f7.txt
+EXPECT:  17) f7.bin
+EXPECT:  18) f8.txt
+EXPECT:  19) f8.bin
+EXPECT:  20) f9.txt
+EXPECT:  21) f9.bin
+EXPECT:  22) f10.txt
+EXPECT:  23) f10.bin
+ACTUAL:   2) tar: test.tar: Cannot open: No such file or directory
+ACTUAL:   3) tar: Error is not recoverable: exiting now
+ACTUAL:   4) diff: hello.txt: No such file or directory
+ACTUAL:   5) diff: gatsby.txt: No such file or directory
+ACTUAL:   6) diff: f1.txt: No such file or directory
+ACTUAL:   7) diff: f1.bin: No such file or directory
+ACTUAL:   8) diff: f2.txt: No such file or directory
+ACTUAL:   9) diff: f2.bin: No such file or directory
+ACTUAL:  10) diff: f3.txt: No such file or directory
+ACTUAL:  11) diff: f3.bin: No such file or directory
+ACTUAL:  12) diff: f4.txt: No such file or directory
+ACTUAL:  13) diff: f4.bin: No such file or directory
+ACTUAL:  14) diff: f5.txt: No such file or directory
+ACTUAL:  15) diff: f5.bin: No such file or directory
+ACTUAL:  16) diff: f6.txt: No such file or directory
+ACTUAL:  17) diff: f6.bin: No such file or directory
+ACTUAL:  18) diff: f7.txt: No such file or directory
+ACTUAL:  19) diff: f7.bin: No such file or directory
+ACTUAL:  20) diff: f8.txt: No such file or directory
+ACTUAL:  21) diff: f8.bin: No such file or directory
+ACTUAL:  22) diff: f9.txt: No such file or directory
+ACTUAL:  23) diff: f9.bin: No such file or directory
+ACTUAL:  24) diff: f10.txt: No such file or directory
+ACTUAL:  25) diff: f10.bin: No such file or directory
+

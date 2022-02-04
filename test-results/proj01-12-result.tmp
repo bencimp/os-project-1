@@ -1,0 +1,45 @@
+* (TEST 12) List Member Files Before and After Append
+COMMENTS:
+Creates an initial archive file, lists member files, appends to the archive,
+then lists files again
+
+** program: bash -v
+
+** --- Failure messages --- 
+- FAILURE: Output Mismatch at lines marked
+
+** --- Side by Side Differences ---
+- Expect output in: test-results/raw/proj01-12-expect.tmp
+- Actual output in: test-results/raw/proj01-12-actual.tmp
+- Differing lines have a character like '|' '>' or '<' in the middle
+#+BEGIN_SRC sbs-diff
+==== EXPECT ====           ==== ACTUAL ====        
+>> ./minitar_tests.sh 12   >> ./minitar_tests.sh 12
+large.bin                <
+f6.txt                   <
+f19.bin                  <
+f11.txt                  <
+large.bin                <
+f6.txt                   <
+f19.bin                  <
+f11.txt                  <
+f8.txt                   <
+f4.txt                   <
+f18.bin                  <
+gatsby.txt               <
+#+END_SRC
+
+** --- Line Differences ---
+EXPECT:   2) large.bin
+EXPECT:   3) f6.txt
+EXPECT:   4) f19.bin
+EXPECT:   5) f11.txt
+EXPECT:   6) large.bin
+EXPECT:   7) f6.txt
+EXPECT:   8) f19.bin
+EXPECT:   9) f11.txt
+EXPECT:  10) f8.txt
+EXPECT:  11) f4.txt
+EXPECT:  12) f18.bin
+EXPECT:  13) gatsby.txt
+

@@ -1,0 +1,55 @@
+* (TEST 8) Append Single Large File to Archive
+COMMENTS:
+Creates an initial archive file and then appends a large text file to that archive
+
+** program: bash -v
+
+** --- Failure messages --- 
+- FAILURE: Output Mismatch at lines marked
+
+** --- Side by Side Differences ---
+- Expect output in: test-results/raw/proj01-08-expect.tmp
+- Actual output in: test-results/raw/proj01-08-actual.tmp
+- Differing lines have a character like '|' '>' or '<' in the middle
+#+BEGIN_SRC sbs-diff
+==== EXPECT ====                ==== ACTUAL ====                                     
+>> ./minitar_tests.sh 8         >> ./minitar_tests.sh 8
+f1.txt                        | tar: test.tar: Cannot open: No such file or directory
+f2.txt                        | tar: Error is not recoverable: exiting now
+f17.bin                       | diff: f1.txt: No such file or directory
+f13.txt                       | diff: f2.txt: No such file or directory
+f1.txt                        | diff: f17.bin: No such file or directory
+f2.txt                        | diff: f13.txt: No such file or directory
+f17.bin                       | tar: test.tar: Cannot open: No such file or directory
+f13.txt                       | tar: Error is not recoverable: exiting now
+gatsby.txt                    | diff: f1.txt: No such file or directory
+                              > diff: f2.txt: No such file or directory
+                              > diff: f17.bin: No such file or directory
+                              > diff: f13.txt: No such file or directory
+                              > diff: gatsby.txt: No such file or directory
+#+END_SRC
+
+** --- Line Differences ---
+EXPECT:   2) f1.txt
+EXPECT:   3) f2.txt
+EXPECT:   4) f17.bin
+EXPECT:   5) f13.txt
+EXPECT:   6) f1.txt
+EXPECT:   7) f2.txt
+EXPECT:   8) f17.bin
+EXPECT:   9) f13.txt
+EXPECT:  10) gatsby.txt
+ACTUAL:   2) tar: test.tar: Cannot open: No such file or directory
+ACTUAL:   3) tar: Error is not recoverable: exiting now
+ACTUAL:   4) diff: f1.txt: No such file or directory
+ACTUAL:   5) diff: f2.txt: No such file or directory
+ACTUAL:   6) diff: f17.bin: No such file or directory
+ACTUAL:   7) diff: f13.txt: No such file or directory
+ACTUAL:   8) tar: test.tar: Cannot open: No such file or directory
+ACTUAL:   9) tar: Error is not recoverable: exiting now
+ACTUAL:  10) diff: f1.txt: No such file or directory
+ACTUAL:  11) diff: f2.txt: No such file or directory
+ACTUAL:  12) diff: f17.bin: No such file or directory
+ACTUAL:  13) diff: f13.txt: No such file or directory
+ACTUAL:  14) diff: gatsby.txt: No such file or directory
+
