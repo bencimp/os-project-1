@@ -287,10 +287,6 @@ int append_files_to_archive(const char *archive_name, const file_list_t *files) 
   fclose(archiveOut);
 
   return 0;
-
-
-
-  return 0;
 }
 
 int get_archive_file_list(const char *archive_name, file_list_t *files) {

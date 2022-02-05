@@ -4,3 +4,6 @@ minitar
 *.zip
 *.tar
 *.zip
+*.tmp
+*.tar
+tartest.tar
