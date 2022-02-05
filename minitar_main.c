@@ -35,31 +35,31 @@ int main(int argc, char **argv) {
     char update[] = "-u";
     char extract[] = "-x";
     if(DEBUG)printf("Strings defined\n");
-    if (strcmp(operation, create) >= 0){
+    if (!strcmp(operation, create)){
       //call create function
       //TODO urgently! due Friday 2/4!
       create_archive(archiveName, &files);
     }
-    else if (strcmp(operation, append)){
+    else if (!strcmp(operation, append)){
       //call append function
       //TODO urgently! due Friday 2/4!
       append_files_to_archive(archiveName, &files);
     }
-    else if (strcmp(operation, list)){
+    else if (!strcmp(operation, list)){
       //call list
       get_archive_file_list(archiveName, &files);
     }
-    else if (strcmp(operation, update)){
+    else if (!strcmp(operation, update)){
       //call update
 
     }
-    else if (strcmp(operation, extract)){
+    else if (!strcmp(operation, extract)){
       //call extract
       extract_files_from_archive(archiveName);
     }
     else {
       //if not valid command, say so and do nothing
-      printf("Invalid command");
+      printf("Invalid command.\n");
     }
 
     file_list_clear(&files);
