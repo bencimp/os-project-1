@@ -1,7 +1,0 @@
->> ./minitar_tests.sh 17
-f8.bin
-large.bin
-f8.txt
-f10.txt
-f19.txt
-diff: f7.bin: No such file or directory
