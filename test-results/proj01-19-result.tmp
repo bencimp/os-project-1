@@ -1,0 +1,52 @@
+* (TEST 19) Extract Files from Archive Created by minitar
+COMMENTS:
+Creates an archive using the standard minitar, then extracts its files
+
+** program: bash -v
+
+** --- Failure messages --- 
+- FAILURE: Output Mismatch at lines marked
+
+** --- Side by Side Differences ---
+- Expect output in: test-results/raw/proj01-19-expect.tmp
+- Actual output in: test-results/raw/proj01-19-actual.tmp
+- Differing lines have a character like '|' '>' or '<' in the middle
+#+BEGIN_SRC sbs-diff
+==== EXPECT ====                 ==== ACTUAL ====                                   
+>> ./minitar_tests.sh 19         >> ./minitar_tests.sh 19
+large.bin                      | Argument 0: "/media/sf_GitHub/os-project-1/minitar"
+f1.txt                         | Argument 1: "-t"
+f9.txt                         | Argument 2: "-f"
+f9.bin                         | Argument 3: "test.tar"
+f1.bin                         | Archive Name: test.tar
+gatsby.txt                     | Strings defined
+                               > Entered create_archive function...
+                               > diff: large.bin: No such file or directory
+                               > diff: f1.txt: No such file or directory
+                               > diff: f9.txt: No such file or directory
+                               > diff: f9.bin: No such file or directory
+                               > diff: f1.bin: No such file or directory
+                               > diff: gatsby.txt: No such file or directory
+#+END_SRC
+
+** --- Line Differences ---
+EXPECT:   2) large.bin
+EXPECT:   3) f1.txt
+EXPECT:   4) f9.txt
+EXPECT:   5) f9.bin
+EXPECT:   6) f1.bin
+EXPECT:   7) gatsby.txt
+ACTUAL:   2) Argument 0: "/media/sf_GitHub/os-project-1/minitar"
+ACTUAL:   3) Argument 1: "-t"
+ACTUAL:   4) Argument 2: "-f"
+ACTUAL:   5) Argument 3: "test.tar"
+ACTUAL:   6) Archive Name: test.tar
+ACTUAL:   7) Strings defined
+ACTUAL:   8) Entered create_archive function...
+ACTUAL:   9) diff: large.bin: No such file or directory
+ACTUAL:  10) diff: f1.txt: No such file or directory
+ACTUAL:  11) diff: f9.txt: No such file or directory
+ACTUAL:  12) diff: f9.bin: No such file or directory
+ACTUAL:  13) diff: f1.bin: No such file or directory
+ACTUAL:  14) diff: gatsby.txt: No such file or directory
+

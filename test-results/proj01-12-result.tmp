@@ -1,0 +1,61 @@
+* (TEST 12) List Member Files Before and After Append
+COMMENTS:
+Creates an initial archive file, lists member files, appends to the archive,
+then lists files again
+
+** program: bash -v
+
+** --- Failure messages --- 
+- FAILURE: Output Mismatch at lines marked
+
+** --- Side by Side Differences ---
+- Expect output in: test-results/raw/proj01-12-expect.tmp
+- Actual output in: test-results/raw/proj01-12-actual.tmp
+- Differing lines have a character like '|' '>' or '<' in the middle
+#+BEGIN_SRC sbs-diff
+==== EXPECT ====                 ==== ACTUAL ====                                   
+>> ./minitar_tests.sh 12         >> ./minitar_tests.sh 12
+large.bin                      | Argument 0: "/media/sf_GitHub/os-project-1/minitar"
+f6.txt                         | Argument 1: "-t"
+f19.bin                        | Argument 2: "-f"
+f11.txt                        | Argument 3: "test.tar"
+large.bin                      | Archive Name: test.tar
+f6.txt                         | Strings defined
+f19.bin                        | Entered create_archive function...
+f11.txt                        | Argument 0: "/media/sf_GitHub/os-project-1/minitar"
+f8.txt                         | Argument 1: "-t"
+f4.txt                         | Argument 2: "-f"
+f18.bin                        | Argument 3: "test.tar"
+gatsby.txt                     | Archive Name: test.tar
+                               > Strings defined
+                               > Entered create_archive function...
+#+END_SRC
+
+** --- Line Differences ---
+EXPECT:   2) large.bin
+EXPECT:   3) f6.txt
+EXPECT:   4) f19.bin
+EXPECT:   5) f11.txt
+EXPECT:   6) large.bin
+EXPECT:   7) f6.txt
+EXPECT:   8) f19.bin
+EXPECT:   9) f11.txt
+EXPECT:  10) f8.txt
+EXPECT:  11) f4.txt
+EXPECT:  12) f18.bin
+EXPECT:  13) gatsby.txt
+ACTUAL:   2) Argument 0: "/media/sf_GitHub/os-project-1/minitar"
+ACTUAL:   3) Argument 1: "-t"
+ACTUAL:   4) Argument 2: "-f"
+ACTUAL:   5) Argument 3: "test.tar"
+ACTUAL:   6) Archive Name: test.tar
+ACTUAL:   7) Strings defined
+ACTUAL:   8) Entered create_archive function...
+ACTUAL:   9) Argument 0: "/media/sf_GitHub/os-project-1/minitar"
+ACTUAL:  10) Argument 1: "-t"
+ACTUAL:  11) Argument 2: "-f"
+ACTUAL:  12) Argument 3: "test.tar"
+ACTUAL:  13) Archive Name: test.tar
+ACTUAL:  14) Strings defined
+ACTUAL:  15) Entered create_archive function...
+

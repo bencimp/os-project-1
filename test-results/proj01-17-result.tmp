@@ -1,0 +1,32 @@
+* (TEST 17) Attempt to Update Existent and Non-Existent Files
+COMMENTS:
+Creates an initial archive file and attempts to update files both contained and
+not contained in that archive
+
+** program: bash -v
+
+** --- Failure messages --- 
+- FAILURE: Output Mismatch at lines marked
+
+** --- Side by Side Differences ---
+- Expect output in: test-results/raw/proj01-17-expect.tmp
+- Actual output in: test-results/raw/proj01-17-actual.tmp
+- Differing lines have a character like '|' '>' or '<' in the middle
+#+BEGIN_SRC sbs-diff
+==== EXPECT ====                 ==== ACTUAL ====                       
+>> ./minitar_tests.sh 17         >> ./minitar_tests.sh 17
+                               > f8.bin
+large.bin                        large.bin
+                               > f8.txt
+                               > f10.txt
+f19.txt                          f19.txt
+f7.bin                         | diff: f7.bin: No such file or directory
+#+END_SRC
+
+** --- Line Differences ---
+ACTUAL:   2) f8.bin
+ACTUAL:   4) f8.txt
+ACTUAL:   5) f10.txt
+EXPECT:   4) f7.bin
+ACTUAL:   7) diff: f7.bin: No such file or directory
+

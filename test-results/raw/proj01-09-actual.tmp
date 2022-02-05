@@ -1,0 +1,12 @@
+>> ./minitar_tests.sh 9
+f4.txt
+f8.bin
+f15.bin
+f16.txt
+f4.txt
+f8.bin
+f15.bin
+f16.txt
+diff: f2.bin: No such file or directory
+diff: hello.txt: No such file or directory
+diff: f9.bin: No such file or directory

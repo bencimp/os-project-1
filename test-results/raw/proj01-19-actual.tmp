@@ -1,0 +1,14 @@
+>> ./minitar_tests.sh 19
+Argument 0: "/media/sf_GitHub/os-project-1/minitar"
+Argument 1: "-t"
+Argument 2: "-f"
+Argument 3: "test.tar"
+Archive Name: test.tar
+Strings defined
+Entered create_archive function...
+diff: large.bin: No such file or directory
+diff: f1.txt: No such file or directory
+diff: f9.txt: No such file or directory
+diff: f9.bin: No such file or directory
+diff: f1.bin: No such file or directory
+diff: gatsby.txt: No such file or directory

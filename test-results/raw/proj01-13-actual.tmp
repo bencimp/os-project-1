@@ -1,0 +1,4 @@
+>> ./minitar_tests.sh 13
+f15.txt
+diff: gatsby.txt: No such file or directory
+diff: f20.bin: No such file or directory
