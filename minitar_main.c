@@ -11,7 +11,7 @@
 int main(int argc, char **argv) {
     if (argc < 3) {
         printf("%s -c|a|t|u|x -f ARCHIVE [FILE...]\n", argv[0]);
-        return 0;
+        return -1;
     }
     if(DEBUG){   
       for (unsigned int x = 0; x < argc; x ++){
@@ -52,7 +52,7 @@ int main(int argc, char **argv) {
     }
     else if (!strcmp(operation, update)){
       //call update
-
+      //update_files_in_archive(archiveName, &files);
     }
     else if (!strcmp(operation, extract)){
       //call extract
