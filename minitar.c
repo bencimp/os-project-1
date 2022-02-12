@@ -366,5 +366,57 @@ int get_archive_file_list(const char *archive_name, file_list_t *files) {
 
 int extract_files_from_archive(const char *archive_name) {
     // TODO: Not yet implemented
+  
+  //This is basically just an amalgamation of the other functions I've written
+
+  //Open the archive file
+  FILE *archiveIn = fopen(archive_name, "rb");
+  char emptyBuffer[1024] = {0};
+  while(1){
+    //Find the name, fopen that file in clear overwrite mode
+    //Make a buffer to hold the information and another to hold the size;
+    char nameBuffer[100] = {0};
+    char sizeBuffer[12] = {0};
+    
+    //Read in the first 100 bytes as the character name
+    fread(nameBuffer, sizeof(nameBuffer), 1, archiveIn);
+    if (DEBUG) printf("Comparing strings to empty string ...\n");
+    if (!(strcmp(nameBuffer, emptyBuffer))){
+      break;
+    }
+    
+    //Find the length, store it
+    fseek(archiveIn, 24, SEEK_CUR);
+    int preConversion, postConversion, holder, count;
+    postConversion = 0;
+    count = 0;
+    fread(sizeBuffer, sizeof(sizeBuffer), 1, archiveIn);
+    if (DEBUG) printf("Pre-conversion octal: %s\n", sizeBuffer);
+    preConversion = atoi(sizeBuffer);
+    //This code converts the number from octal to decimal
+    while(preConversion > 0){
+      holder = preConversion % 10;
+      preConversion /= 10;
+      postConversion += (holder * pow(8, count));
+      count ++;
+    }
+    
+    if (DEBUG) printf("Post-conversion to Octal: %d\n", postConversion);
+    int skipBytes = (512-(postConversion%512));
+    
+    //Go to the end of the header
+    fseek(archiveIn, 376, SEEK_CUR);
+    //read in bytes to match the file length and write it all to the file
+    FILE *outFile = fopen(nameBuffer, "wb");
+    //Read the remaining bytes
+    char buffer[1];
+    for(int x = 0; x < postConversion; x ++){
+      fread(buffer, sizeof(buffer), 1, archiveIn);
+      fwrite(buffer, sizeof(buffer), 1, outFile);
+    }
+    
+    fseek(archiveIn, skipBytes, SEEK_CUR);
+    //loop it good
+  }
     return 0;
 }
