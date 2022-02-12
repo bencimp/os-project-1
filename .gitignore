@@ -5,5 +5,3 @@ minitar
 *.tar
 *.zip
 *.tmp
-*.tar
-tartest.tar

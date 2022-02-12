@@ -4,7 +4,8 @@
 #include "file_list.h"
 #include "minitar.h"
 
-#define DEBUG 1
+#define DEBUG 0
+
 
 
 int main(int argc, char **argv) {
@@ -31,7 +32,7 @@ int main(int argc, char **argv) {
     }
     char create[] = "-c";
     char append[] = "-a";
-    char list[] = "-l";
+    char list[] = "-t";
     char update[] = "-u";
     char extract[] = "-x";
     if(DEBUG)printf("Strings defined\n");

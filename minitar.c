@@ -8,12 +8,15 @@
 #include <sys/sysmacros.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 #include "minitar.h"
 
 #define NUM_TRAILING_BLOCKS 2
 #define MAX_MSG_LEN 512
-#define DEBUG 1
+#define DEBUG 0
+
+//While I was going to write helper functions, I was unsure if they would work with the header provided, as this is the first class I've had to use C for. If I have time, I'll clean them up later.
 
 /*
  * Helper function to compute the checksum of a tar header block
@@ -291,7 +294,74 @@ int append_files_to_archive(const char *archive_name, const file_list_t *files) 
 
 int get_archive_file_list(const char *archive_name, file_list_t *files) {
     // TODO: Not yet implemented
-    return 0;
+  if(DEBUG) printf("Entered get_archive_file_list function...\n");
+
+  FILE *archiveIn = fopen(archive_name, "rb");
+
+  //This code copied from the check for appending files to the archive. It will have to be edited, obviously, but it's fit for purpose right now.
+  char emptyBuffer[1024] = {0};
+  /*char checkBuffer[1024] = {0};
+  fseek(archiveCheck, -1024, SEEK_END);
+  fread(checkBuffer, sizeof(checkBuffer), 1, archiveCheck);
+  if(!(strcmp(emptyBuffer, checkBuffer))){
+    remove_trailing_bytes(archive_name, 1024);
+  }
+  fclose(archiveCheck);*/
+
+  //Condition for this while loop TBD, but should be pretty clear once the loop body is written
+  //For each file,
+  while(1){
+   //Make a buffer to hold the information and another to hold the size;
+    char nameBuffer[100] = {0};
+    char sizeBuffer[12] = {0};
+
+    //Read in the first 100 bytes as the character name
+    fread(nameBuffer, sizeof(nameBuffer), 1, archiveIn);
+
+    //printf("%s\n", nameBuffer);
+    //If the name is empty, break
+    if (DEBUG) printf("Comparing strings to empty string ...\n");
+    if (!(strcmp(nameBuffer, emptyBuffer))){
+      break;
+    }
+
+    //Print it out to the terminal
+    printf("%s\n", nameBuffer);
+    /*char breaker = '\0';
+    int n = 0;
+    while (nameBuffer[n] != breaker){
+      printf("%c", nameBuffer[n]);
+      n ++;
+    }
+    printf("\n");
+    */
+    //Read the file size. We can't use the same cheat that we used previously, because we are just one file. As a result, we have to instead read the file size from the header and interpret the octal and turn it into a decimal number, then skip forward that many blocks of 512 bytes, rounded up.
+    fseek(archiveIn, 24, SEEK_CUR);
+    int preConversion, postConversion, holder, count;
+    postConversion = 0;
+    count = 0;
+    fread(sizeBuffer, sizeof(sizeBuffer), 1, archiveIn);
+    if (DEBUG) printf("Pre-conversion octal: %s\n", sizeBuffer);
+    preConversion = atoi(sizeBuffer);
+    //This code converts the number from octal to decimal
+    while(preConversion > 0){
+      holder = preConversion % 10;
+      preConversion /= 10;
+      postConversion += (holder * pow(8, count));
+      count ++;
+    }
+
+    if (DEBUG) printf("Post-conversion to Octal: %d\n", postConversion);
+    int skipBytes = postConversion + (512-(postConversion%512));
+
+    //Skip the appropriate number of bytes to get to the next header, which should be the remaining length of the header plus filesize divided by 512 rounded up
+    fseek(archiveIn, (skipBytes + 376), SEEK_CUR);
+    //Loop
+    //in this case, it's entirely passive, this loop relying on being broken out of by 
+    
+
+  }
+  return 0;
 }
 
 int extract_files_from_archive(const char *archive_name) {
