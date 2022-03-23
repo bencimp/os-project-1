@@ -49,10 +49,28 @@ int main(int argc, char **argv) {
     else if (!strcmp(operation, list)){
       //call list
       get_archive_file_list(archiveName, &files);
+      node_t *currentNode;
+      currentNode = files.head;
+      while(currentNode != NULL){
+        printf("%s\n",currentNode->name);
+        currentNode = currentNode-> next;
+      }
     }
     else if (!strcmp(operation, update)){
+      if(DEBUG) printf("Update command recognized.\n");
       //call update
       //update_files_in_archive(archiveName, &files);
+      //Update is just "call list, check list to see if everything exists, then pass list to append"
+      file_list_t holderList;
+      if(get_archive_file_list(archiveName, &holderList) == 1) return 1;
+      if(DEBUG) printf("Archive list retrieved.\n");
+      node_t *hCurNode = holderList.head;
+      while(hCurNode != NULL){
+        if(DEBUG) printf("Checking file \"%s\"...\n", hCurNode->name);
+        if(!file_list_contains(&files, hCurNode->name)) return 1;
+      }
+      if(DEBUG) printf("Appending files\n");
+      append_files_to_archive(archiveName, &files);
     }
     else if (!strcmp(operation, extract)){
       //call extract

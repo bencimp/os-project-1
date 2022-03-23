@@ -326,7 +326,11 @@ int get_archive_file_list(const char *archive_name, file_list_t *files) {
     }
 
     //Print it out to the terminal
-    printf("%s\n", nameBuffer);
+    if(DEBUG) printf("%s\n", nameBuffer);
+
+    //Re-read the writeup: we're not supposed to do that. Instead, push it to the file list
+    file_list_add(files, nameBuffer);
+
     /*char breaker = '\0';
     int n = 0;
     while (nameBuffer[n] != breaker){
